@@ -1,3 +1,4 @@
+#Connection file for the DB connection
 import oracledb
 
 def get_connection():
