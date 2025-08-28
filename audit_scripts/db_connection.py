@@ -3,7 +3,7 @@ import oracledb
 
 def get_connection():
     return oracledb.connect(
-        user="SYS",
-        password="Oracle123",
+        user="audit_bot",
+        password="audit_bot123",
         dsn="140.245.5.226:1521/ORCLPDB1"
     )
