@@ -1,0 +1,21 @@
+
+
+services:
+  oracle-db:
+    image: oracle/database:19.3.0-ee
+    container_name: DB1
+    environment:
+      ORACLE_SID: ORCLCDB
+      ORACLE_PDB: ORCLPDB1
+      ORACLE_PWD: Oracle123   # set your own strong password
+      ORACLE_CHARACTERSET: AL32UTF8
+    ports:
+      - "1521:1521"   # SQL*Net
+      - "5500:5500"   # Enterprise Manager Express (optional)
+    volumes:
+      - oracle_data:/opt/oracle/oradata   # persist database files on host
+    restart: unless-stopped
+    mem_limit: 6g
+volumes:
+  oracle_data:
+    driver: local

@@ -1,0 +1,47 @@
+User Access Risk Summary
+Run at: 2025-08-22 18:04:38.149359
+
+SYS -> High
+SYSTEM -> High
+XS$NULL -> Low
+DBSNMP -> Low
+APPQOSSYS -> Low
+GSMCATUSER -> Low
+MDDATA -> Low
+DBSFWUSER -> Low
+PDBADMIN -> Low
+SYSBACKUP -> High
+REMOTE_SCHEDULER_AGENT -> Low
+GGSYS -> High
+ANONYMOUS -> Low
+GSMUSER -> Low
+SYSRAC -> Low
+CTXSYS -> High
+DVSYS -> Low
+DVF -> Low
+OJVMSYS -> Low
+SI_INFORMTN_SCHEMA -> Low
+AUDSYS -> Low
+GSMADMIN_INTERNAL -> High
+DIP -> Low
+ORDPLUGINS -> Low
+AUDIT_BOT -> Low
+LBACSYS -> Low
+MDSYS -> Low
+OLAPSYS -> Low
+SYSKM -> Low
+ORDDATA -> Low
+OUTLN -> Low
+ORACLE_OCM -> Low
+SYS$UMF -> Low
+XDB -> High
+WMSYS -> High
+SYSDG -> Low
+ORDSYS -> Low
+IMP_FULL_DATABASE -> High
+DBA -> High
+EM_EXPRESS_ALL -> High
+OLAP_DBA -> High
+DV_REALM_OWNER -> High
+DATAPUMP_IMP_FULL_DATABASE -> High
+LOGSTDBY_ADMINISTRATOR -> High
