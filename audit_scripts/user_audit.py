@@ -42,7 +42,7 @@ def get_users_with_roles():
                 "roles": roles_map.get(username, [])
             })
 
-        return jsonify({"status": "success", "data": {"users": users}})
+        return {"status": "success", "data": {"users": users}}
 
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})
