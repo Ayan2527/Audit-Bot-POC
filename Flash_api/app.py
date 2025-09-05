@@ -44,7 +44,7 @@ def password_audit():
 @app.route('/audit/roles', methods=['GET'])
 def role_audit():
     try:
-        results = audit_roles()
+        results = get_tablespace_info()
         return jsonify({"status": "success", "data": results})
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
