@@ -4,26 +4,27 @@ from audit_scripts.db_connection import get_connection
 
 def get_tablespace_info():
     """
-    Fetch tablespace usage details per user and tablespace.
-    Returns list of dicts with username, tablespace, allocated, used, pct_used.
+    Fetch tablespace usage details for all tablespaces.
+    Returns list of dicts with tablespace_name, contents, status, allocated, used, pct_used.
     """
     query = """
         SELECT 
-            u.username,
-            q.tablespace_name,
-            ROUND(SUM(d.bytes) / 1024 / 1024, 2) AS allocated_mb,
-            ROUND((SUM(d.bytes) - NVL(f.free_bytes, 0)) / 1024 / 1024, 2) AS used_mb,
-            ROUND(((SUM(d.bytes) - NVL(f.free_bytes, 0)) / SUM(d.bytes)) * 100, 2) AS pct_used
-        FROM dba_users u
-        JOIN dba_ts_quotas q ON u.username = q.username
-        JOIN dba_tablespaces t ON q.tablespace_name = t.tablespace_name
-        JOIN dba_data_files d ON t.tablespace_name = d.tablespace_name
+            ts.tablespace_name,
+            ts.contents,
+            ts.status,
+            ROUND(SUM(df.bytes)/1024/1024, 2) AS allocated_mb,
+            ROUND((SUM(df.bytes) - NVL(fs.free_bytes, 0))/1024/1024, 2) AS used_mb,
+            ROUND(((SUM(df.bytes) - NVL(fs.free_bytes, 0)) / SUM(df.bytes)) * 100, 2) AS pct_used
+        FROM dba_tablespaces ts
+        JOIN dba_data_files df 
+            ON ts.tablespace_name = df.tablespace_name
         LEFT JOIN (
             SELECT tablespace_name, SUM(bytes) AS free_bytes
             FROM dba_free_space
             GROUP BY tablespace_name
-        ) f ON t.tablespace_name = f.tablespace_name
-        GROUP BY u.username, q.tablespace_name, f.free_bytes
+        ) fs 
+            ON ts.tablespace_name = fs.tablespace_name
+        GROUP BY ts.tablespace_name, ts.contents, ts.status, fs.free_bytes
         ORDER BY pct_used DESC
     """
     conn = get_connection()
@@ -42,4 +43,3 @@ if __name__ == "__main__":
     data = get_tablespace_info()
     for row in data:
         print(row)
-
